@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - ATTOH-MENSAH Yao Pédro-Ebenezer</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-brand" id="nav-brand">ATTOH-MENSAH</div>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#hero" data-i18n="nav.home">Accueil</a></li>
+            <li><a href="#introduction" data-i18n="nav.intro">Introduction</a></li>
+            <li><a href="#about" data-i18n="nav.about">À propos</a></li>
+            <li><a href="#skills" data-i18n="nav.skills">Compétences</a></li>
+            <li><a href="#experience" data-i18n="nav.experience">Expérience</a></li>
+            <li><a href="#projects" data-i18n="nav.projects">Projets</a></li>
+            <li><a href="#testimonials" data-i18n="nav.testimonials">Témoignages</a></li>
+            <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="nav-action-btn" id="lang-toggle" title="Switch language">FR | EN</button>
+            <button class="nav-action-btn" id="theme-toggle" title="Mode sombre">
+                <i class="fas fa-moon" id="theme-icon"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-blob blob-1"></div>
+        <div class="hero-blob blob-2"></div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <span class="hero-subtitle" id="hero-subtitle"></span>
+                <h1 class="hero-title" id="hero-title"></h1>
+                <p class="hero-name" id="hero-name"></p>
+                <p class="hero-tagline" id="hero-tagline"></p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary" data-i18n="hero.contact">Me contacter</a>
+                    <a href="#" class="btn btn-outline-light" id="hero-cv-btn" download>
+                        <i class="fas fa-download"></i> <span data-i18n="hero.cv">Télécharger mon CV</span>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-img-wrapper">
+                    <img id="hero-image" src="" alt="Photo de profil">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Introduction Section -->
+    <section class="section" id="introduction">
+        <div class="container">
+            <div class="intro-grid">
+                <div class="intro-image">
+                    <img id="intro-image" src="" alt="Introduction">
+                </div>
+                <div class="intro-text">
+                    <h2 class="section-title" id="intro-title"></h2>
+                    <p id="intro-text"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section section-alt" id="about">
+        <div class="container">
+            <h2 class="section-title" id="about-title"></h2>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p id="about-text"></p>
+                    <div class="about-lists">
+                        <div class="about-list">
+                            <h3 data-i18n="about.qualities">Qualités</h3>
+                            <ul id="about-qualities"></ul>
+                        </div>
+                        <div class="about-list">
+                            <h3 data-i18n="about.values">Valeurs</h3>
+                            <ul id="about-values"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <img id="about-image" src="" alt="À propos">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section class="section" id="education">
+        <div class="container">
+            <h2 class="section-title" id="education-title"></h2>
+            <div class="timeline" id="education-items"></div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="section section-alt" id="skills">
+        <div class="container">
+            <h2 class="section-title" id="skills-title"></h2>
+            <div class="skills-grid" id="skills-items"></div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section class="section" id="experience">
+        <div class="container">
+            <h2 class="section-title" id="experience-title"></h2>
+            <div class="timeline" id="experience-items"></div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="section section-alt" id="projects">
+        <div class="container">
+            <h2 class="section-title" id="projects-title"></h2>
+            <div class="projects-grid" id="projects-items"></div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <h2 class="section-title" id="testimonials-title" data-i18n="testimonials.title">TÉMOIGNAGES</h2>
+            <div class="testimonials-grid" id="testimonials-items"></div>
+        </div>
+    </section>
+
+    <!-- Roadmap Section -->
+    <section class="section section-alt" id="roadmap">
+        <div class="container">
+            <h2 class="section-title" id="roadmap-title"></h2>
+            <div class="roadmap-grid" id="roadmap-items"></div>
+        </div>
+    </section>
+
+    <!-- Inspirations Section -->
+    <section class="section" id="inspirations">
+        <div class="container">
+            <h2 class="section-title" id="inspirations-title"></h2>
+            <div class="inspirations-grid" id="inspirations-items"></div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="section section-alt" id="blog">
+        <div class="container">
+            <h2 class="section-title" id="blog-title" data-i18n="blog.title">BLOG & ARTICLES</h2>
+            <div class="blog-grid" id="blog-items"></div>
+        </div>
+    </section>
+
+    <!-- Objective Section -->
+    <section class="section objective-section" id="objective">
+        <div class="container">
+            <h2 class="section-title" id="objective-title"></h2>
+            <blockquote class="objective-text" id="objective-text"></blockquote>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section section-alt" id="contact">
+        <div class="container">
+            <h2 class="section-title" id="contact-title"></h2>
+            <p class="contact-subtitle" id="contact-subtitle"></p>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span id="contact-email"></span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span id="contact-phone"></span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span id="contact-location"></span>
+                    </div>
+                    <div class="contact-socials">
+                        <a id="contact-instagram" href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a id="contact-linkedin" href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a id="contact-email-link" href="#"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+                <form class="contact-form" id="contact-form">
+                    <input type="text" data-i18n-placeholder="contact.name" placeholder="Votre nom" required>
+                    <input type="email" data-i18n-placeholder="contact.email" placeholder="Votre email" required>
+                    <textarea data-i18n-placeholder="contact.message" placeholder="Votre message" rows="5" required></textarea>
+                    <button type="submit" class="btn btn-primary" data-i18n="contact.send">Envoyer</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 ATTOH-MENSAH Yao Pédro-Ebenezer. <span data-i18n="footer.rights">Tous droits réservés.</span></p>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
