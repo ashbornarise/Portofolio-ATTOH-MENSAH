@@ -407,6 +407,69 @@ body {
     background: #2E86C1;
 }
 
+/* ===== Publish Button ===== */
+.btn-publish {
+    background: linear-gradient(135deg, #1565C0, #6A1B9A);
+    color: var(--white);
+    font-size: 0.85rem;
+    padding: 11px 16px;
+    justify-content: center;
+    width: 100%;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 15px rgba(21, 101, 192, 0.35);
+    transition: var(--transition);
+}
+
+.btn-publish:hover {
+    background: linear-gradient(135deg, #0D47A1, #4A148C);
+    box-shadow: 0 6px 20px rgba(21, 101, 192, 0.5);
+    transform: translateY(-1px);
+}
+
+.btn-publish:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Highlight GitHub link in sidebar */
+.sidebar-link-github {
+    border: 1px solid rgba(21, 101, 192, 0.3);
+    background: rgba(21, 101, 192, 0.05);
+    margin-top: 8px;
+}
+
+.sidebar-link-github:hover,
+.sidebar-link-github.active {
+    background: rgba(21, 101, 192, 0.2) !important;
+    color: var(--white) !important;
+}
+
+/* ===== Publish Progress Bar ===== */
+.publish-progress-bar {
+    height: 8px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.publish-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #1565C0, #6A1B9A);
+    border-radius: 20px;
+    transition: width 0.4s ease;
+}
+
+/* ===== GitHub Info card ===== */
+.github-info-list {
+    color: var(--gray-600);
+    font-size: 0.88rem;
+    padding-left: 20px;
+    line-height: 2.2;
+}
+
+.github-info-list li strong { color: var(--gray-800); }
+
 /* ===== Toast ===== */
 .toast {
     position: fixed;

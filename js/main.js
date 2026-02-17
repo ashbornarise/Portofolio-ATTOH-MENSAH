@@ -384,12 +384,32 @@ function initContactForm() {
   });
 }
 
-// ===== Init =====
-document.addEventListener('DOMContentLoaded', function() {
-  const data = loadContent();
+// ===== Run all features with data =====
+function run(data) {
   render(data);
   initNavbar();
   initContactForm();
   initTheme();
   initLang();
+}
+
+// ===== Init =====
+// Priority: portfolio-data.json (GitHub Pages) → localStorage → DEFAULT_CONTENT
+document.addEventListener('DOMContentLoaded', function() {
+  fetch('portfolio-data.json?t=' + Date.now())
+    .then(function(r) {
+      if (!r.ok) throw new Error('not found');
+      return r.json();
+    })
+    .then(function(data) {
+      // Merge missing sections in case the JSON is from an older publish
+      if (!data.testimonials) data.testimonials = DEFAULT_CONTENT.testimonials;
+      if (!data.blog) data.blog = DEFAULT_CONTENT.blog;
+      if (data.hero && data.hero.cv === undefined) data.hero.cv = '';
+      run(data);
+    })
+    .catch(function() {
+      // Fallback to localStorage or embedded defaults
+      run(loadContent());
+    });
 });
