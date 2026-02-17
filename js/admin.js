@@ -37,8 +37,8 @@ function showAdmin() {
 
 // Default content (same as main.js, embedded for file:// compatibility)
 const DEFAULT_CONTENT = {
-  "hero": { "subtitle": "CREATIVE", "title": "PORTFOLIO", "name": "ATTOH-MENSAH Yao Pédro-Ebenezer", "tagline": "Étudiant en Génie Mécanique | Concepteur CAO | Formateur SolidWorks", "image": "Media/hero-photo.jpeg" },
-  "introduction": { "title": "INTRODUCTION", "text": "Je suis ATTOH-MENSAH Yao Pédro-Ebenezer, étudiant en Génie Mécanique à l'ESIG Global Success (Togo). Mon parcours est défini par une alliance entre la maîtrise des outils numériques et la réalité du terrain. Passionné par la conception mécanique et l'automatisme, je transforme les idées en solutions concrètes grâce à la CAO et à la fabrication.", "image": "Media/IMG-20250207-WA0066.jpg.jpeg" },
+  "hero": { "subtitle": "CREATIVE", "title": "PORTFOLIO", "name": "ATTOH-MENSAH Yao Pédro-Ebenezer", "tagline": "Étudiant en Génie Mécanique | Concepteur CAO | Formateur SolidWorks", "image": "Media/hero-photo.jpeg", "cv": "" },
+  "introduction": { "title": "INTRODUCTION", "text": "Je suis ATTOH-MENSAH Yao Pédro-Ebenezer, étudiant en Génie Mécanique à l'ESIG Global Success (Togo). Mon parcours est défini par une alliance entre la maîtrise des outils numériques et la réalité du terrain. Passionné par la conception mécanique et l'automatisme, je transforme les idées en solutions concrètes grâce à la CAO et à la fabrication.", "image": "Media/Intro.jpeg" },
   "about": { "title": "À PROPOS DE MOI", "text": "Initié dès la classe de 6ème à l'OPEM, j'ai développé une expertise solide en CAO et en Automatisme. Je maîtrise SolidWorks, AutoCAD et Fusion 360 de manière avancée. Je conçois et programme des systèmes via Arduino. Mon savoir-faire s'est consolidé à travers des missions concrètes en maintenance navale, installation industrielle et formation technique.", "image": "Media/IMG-20250213-WA0045.jpg.jpeg", "qualities": ["Leadership & Esprit d'équipe", "Pédagogie & Communication", "Rigueur & Précision", "Adaptabilité"], "values": ["Excellence", "Partage du savoir", "Intégrité", "Travail bien fait"] },
   "education": { "title": "ÉDUCATION", "items": [{ "school": "ESIG Global Success", "degree": "Licence en Génie Mécanique", "year": "2024 - En cours", "description": "Formation approfondie en conception mécanique, automatisme et sciences de l'ingénieur au Togo." }, { "school": "OPEM", "degree": "Formation initiale en techniques industrielles", "year": "Depuis la 6ème", "description": "Initiation précoce aux outils de conception assistée par ordinateur et aux techniques de fabrication." }] },
   "skills": { "title": "COMPÉTENCES", "items": [{ "name": "SolidWorks", "category": "CAO", "description": "Maîtrise avancée de la modélisation 3D, assemblages complexes et mise en plan industrielle." }, { "name": "AutoCAD", "category": "CAO", "description": "Conception de plans 2D/3D professionnels pour l'industrie mécanique." }, { "name": "Fusion 360", "category": "CAO", "description": "Modélisation paramétrique, simulation et fabrication assistée par ordinateur." }, { "name": "Arduino", "category": "Automatisme", "description": "Conception et programmation de systèmes automatisés et de prototypes fonctionnels." }, { "name": "Maintenance Industrielle", "category": "Terrain", "description": "Diagnostic, réparation et optimisation de systèmes mécaniques en environnement industriel." }, { "name": "Gestion d'équipe", "category": "Leadership", "description": "Direction et coordination de groupes jusqu'à 30 personnes sur des projets techniques." }] },
@@ -46,6 +46,8 @@ const DEFAULT_CONTENT = {
   "projects": { "title": "MES PROJETS", "items": [{ "name": "Feu Tricolore Automatisé", "category": "Réalisé", "description": "Conception et programmation d'un système de feux tricolores automatisé utilisant Arduino.", "image": "mes-projets/feu-tricolores.jpg.jpeg" }, { "name": "Projet Mécanique Industriel", "category": "Réalisé", "description": "Réalisation d'un projet de conception mécanique intégrant la modélisation 3D et la fabrication.", "image": "mes-projets/20240719_102714.jpg.jpeg" }, { "name": "Conception et Fabrication", "category": "Réalisé", "description": "Projet technique alliant conception numérique sur SolidWorks et réalisation physique en atelier.", "image": "mes-projets/20240719_102946.jpg.jpeg" }] },
   "roadmap": { "title": "MA FEUILLE DE ROUTE", "items": [{ "date": "Été 2026", "title": "Certification SOLIDWORKS", "description": "Passer la certification CSWA et CSWP de Dassault Systèmes.", "icon": "🎯" }, { "date": "Mai 2027", "title": "Stage en Maintenance Industrielle", "description": "Intégrer une entreprise industrielle pour parfaire mes compétences.", "icon": "⚙️" }, { "date": "Juin 2027", "title": "Soutenance de Licence", "description": "Réaliser un projet de fin d'études ambitieux.", "icon": "🎓" }, { "date": "2027-2029", "title": "Master à Sorbonne Paris Nord", "description": "Poursuivre en Master en sciences pour l'ingénieur.", "icon": "🌍" }] },
   "inspirations": { "title": "MES MODÈLES D'INSPIRATION", "items": [{ "name": "Professeur Mawussi Bernardin", "role": "Université Sorbonne Paris Nord", "description": "Un modèle de réussite dans le haut enseignement en France." }, { "name": "Docteur Alphonse GOGOLI", "role": "Co-fondateur DEEZPRO", "description": "Mon mentor dans l'entrepreneuriat numérique." }, { "name": "Professeur Ayarema AFIO", "role": "Université de Lomé", "description": "Une référence de la recherche scientifique au Togo." }] },
+  "testimonials": { "title": "TÉMOIGNAGES", "items": [{ "author": "Dr. Alphonse GOGOLI", "role": "Co-fondateur DEEZPRO", "text": "Pédro est un formateur exceptionnel qui sait transmettre sa passion pour la CAO à ses étudiants avec une clarté remarquable.", "rating": 5, "avatar": "AG" }, { "author": "Équipe JETOUR", "role": "Concessionnaire Automobile", "text": "Un technicien sérieux et compétent. L'installation des ponts élévateurs a été réalisée dans les délais avec un professionnalisme exemplaire.", "rating": 5, "avatar": "JT" }, { "author": "Prof. Ayarema AFIO", "role": "Université de Lomé", "text": "Un étudiant brillant doté d'une curiosité intellectuelle rare. Son projet de table de dessin témoigne d'une maîtrise technique impressionnante.", "rating": 5, "avatar": "PA" }] },
+  "blog": { "title": "BLOG & ARTICLES", "items": [{ "title": "Introduction à SolidWorks pour débutants", "date": "Janvier 2026", "tag": "CAO", "summary": "Découvrez les bases de SolidWorks : interface, premières esquisses et modélisation 3D simple. Un guide pratique pour démarrer la conception assistée par ordinateur." }, { "title": "Arduino et automatisme : mon expérience", "date": "Novembre 2025", "tag": "Automatisme", "summary": "Retour d'expérience sur mon projet de feux tricolores automatisés : conception du circuit, programmation et intégration mécanique." }, { "title": "La maintenance navale : un métier d'avenir", "date": "Septembre 2025", "tag": "Terrain", "summary": "Mon stage chez OTAM m'a ouvert les yeux sur la complexité de la maintenance des systèmes navals et les opportunités qu'offre ce secteur en Afrique." }] },
   "objective": { "title": "MON OBJECTIF", "text": "Mon ambition ultime est de devenir un pionnier de l'ingénierie moderne en Afrique. Je souhaite créer des solutions industrielles 'Made in Togo' qui répondent aux besoins locaux, tout en bâtissant une structure capable de former les futurs experts technologiques du continent." },
   "contact": { "title": "CONTACTEZ-MOI", "subtitle": "Collaborons ensemble !", "email": "attohmensahyaopedroebenezer@gmail.com", "phone": "+228 99023602", "location": "Lomé, Baguida Monument", "instagram": "#", "linkedin": "#" }
 };
@@ -94,6 +96,8 @@ function renderSection(section) {
         skills: 'Compétences',
         experience: 'Expérience',
         projects: 'Projets',
+        testimonials: 'Témoignages',
+        blog: 'Blog & Articles',
         roadmap: 'Feuille de route',
         inspirations: 'Inspirations',
         objective: 'Objectif',
@@ -116,7 +120,8 @@ function renderSection(section) {
                 { key: 'title', label: 'Titre principal', type: 'text' },
                 { key: 'name', label: 'Nom complet', type: 'text' },
                 { key: 'tagline', label: 'Description courte', type: 'text' },
-                { key: 'image', label: 'Image (chemin)', type: 'text' }
+                { key: 'cv', label: 'Lien vers le CV (URL ou chemin)', type: 'text' },
+                { key: 'image', label: 'Photo de profil', type: 'text' }
             ]);
             break;
 
@@ -156,6 +161,16 @@ function renderSection(section) {
         case 'projects':
             html = `<div class="form-card"><div class="form-group"><label>Titre de section</label><input type="text" value="${escapeHtml(data.title)}" onchange="contentData.projects.title = this.value"></div></div>`;
             html += renderArraySection(data.items, 'projects', ['name', 'category', 'description', 'image'], ['Nom du projet', 'Catégorie', 'Description', 'Image (chemin)']);
+            break;
+
+        case 'testimonials':
+            html = `<div class="form-card"><div class="form-group"><label>Titre de section</label><input type="text" value="${escapeHtml(data.title)}" onchange="contentData.testimonials.title = this.value"></div></div>`;
+            html += renderArraySection(data.items, 'testimonials', ['author', 'role', 'text', 'rating', 'avatar'], ['Auteur', 'Rôle / Entreprise', 'Témoignage', 'Note (1-5)', 'Initiales (avatar)']);
+            break;
+
+        case 'blog':
+            html = `<div class="form-card"><div class="form-group"><label>Titre de section</label><input type="text" value="${escapeHtml(data.title)}" onchange="contentData.blog.title = this.value"></div></div>`;
+            html += renderArraySection(data.items, 'blog', ['title', 'date', 'tag', 'summary'], ['Titre de l\'article', 'Date', 'Catégorie (tag)', 'Résumé']);
             break;
 
         case 'roadmap':

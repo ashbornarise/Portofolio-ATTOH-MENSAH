@@ -2,14 +2,106 @@
 
 const STORAGE_KEY = 'portfolio_content';
 
-// Default content (embedded for file:// and GitHub Pages compatibility)
+// ===== i18n Translations =====
+const i18n = {
+  fr: {
+    'nav.home': 'Accueil', 'nav.intro': 'Introduction', 'nav.about': 'À propos',
+    'nav.skills': 'Compétences', 'nav.experience': 'Expérience', 'nav.projects': 'Projets',
+    'nav.testimonials': 'Témoignages', 'nav.contact': 'Contact',
+    'hero.contact': 'Me contacter', 'hero.cv': 'Télécharger mon CV',
+    'about.qualities': 'Qualités', 'about.values': 'Valeurs',
+    'testimonials.title': 'TÉMOIGNAGES', 'blog.title': 'BLOG & ARTICLES',
+    'contact.name': 'Votre nom', 'contact.email': 'Votre email',
+    'contact.message': 'Votre message', 'contact.send': 'Envoyer',
+    'footer.rights': 'Tous droits réservés.'
+  },
+  en: {
+    'nav.home': 'Home', 'nav.intro': 'Introduction', 'nav.about': 'About',
+    'nav.skills': 'Skills', 'nav.experience': 'Experience', 'nav.projects': 'Projects',
+    'nav.testimonials': 'Testimonials', 'nav.contact': 'Contact',
+    'hero.contact': 'Contact me', 'hero.cv': 'Download my CV',
+    'about.qualities': 'Qualities', 'about.values': 'Values',
+    'testimonials.title': 'TESTIMONIALS', 'blog.title': 'BLOG & ARTICLES',
+    'contact.name': 'Your name', 'contact.email': 'Your email',
+    'contact.message': 'Your message', 'contact.send': 'Send',
+    'footer.rights': 'All rights reserved.'
+  }
+};
+
+let currentLang = 'fr';
+
+function applyI18n(lang) {
+  currentLang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (i18n[lang] && i18n[lang][key]) el.textContent = i18n[lang][key];
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.dataset.i18nPlaceholder;
+    if (i18n[lang] && i18n[lang][key]) el.placeholder = i18n[lang][key];
+  });
+}
+
+function initLang() {
+  const stored = localStorage.getItem('portfolio_lang') || 'fr';
+  applyI18n(stored);
+  const btn = document.getElementById('lang-toggle');
+  if (!btn) return;
+  btn.textContent = stored === 'fr' ? 'FR | EN' : 'EN | FR';
+  btn.addEventListener('click', () => {
+    const newLang = currentLang === 'fr' ? 'en' : 'fr';
+    localStorage.setItem('portfolio_lang', newLang);
+    applyI18n(newLang);
+    btn.textContent = newLang === 'fr' ? 'FR | EN' : 'EN | FR';
+  });
+}
+
+// ===== Dark Mode =====
+function initTheme() {
+  const stored = localStorage.getItem('portfolio_theme') || 'light';
+  setTheme(stored);
+  const btn = document.getElementById('theme-toggle');
+  if (btn) btn.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  });
+}
+
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('portfolio_theme', theme);
+  const icon = document.getElementById('theme-icon');
+  if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+}
+
+// ===== Typewriter Effect =====
+function typewriter(elementId, text, speed) {
+  speed = speed || 90;
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  el.textContent = '';
+  el.classList.add('typewriter-active');
+  let i = 0;
+  const timer = setInterval(function() {
+    if (i < text.length) {
+      el.textContent += text[i++];
+    } else {
+      clearInterval(timer);
+      el.classList.remove('typewriter-active');
+      el.classList.add('typewriter-done');
+    }
+  }, speed);
+}
+
+// ===== Default Content =====
 const DEFAULT_CONTENT = {
   "hero": {
     "subtitle": "CREATIVE",
     "title": "PORTFOLIO",
     "name": "ATTOH-MENSAH Yao Pédro-Ebenezer",
     "tagline": "Étudiant en Génie Mécanique | Concepteur CAO | Formateur SolidWorks",
-    "image": "Media/hero-photo.jpeg"
+    "image": "Media/hero-photo.jpeg",
+    "cv": ""
   },
   "introduction": {
     "title": "INTRODUCTION",
@@ -20,34 +112,14 @@ const DEFAULT_CONTENT = {
     "title": "À PROPOS DE MOI",
     "text": "Initié dès la classe de 6ème à l'OPEM, j'ai développé une expertise solide en CAO et en Automatisme. Je maîtrise SolidWorks, AutoCAD et Fusion 360 de manière avancée. Je conçois et programme des systèmes via Arduino. Mon savoir-faire s'est consolidé à travers des missions concrètes en maintenance navale, installation industrielle et formation technique.",
     "image": "Media/IMG-20250213-WA0045.jpg.jpeg",
-    "qualities": [
-      "Leadership & Esprit d'équipe",
-      "Pédagogie & Communication",
-      "Rigueur & Précision",
-      "Adaptabilité"
-    ],
-    "values": [
-      "Excellence",
-      "Partage du savoir",
-      "Intégrité",
-      "Travail bien fait"
-    ]
+    "qualities": ["Leadership & Esprit d'équipe", "Pédagogie & Communication", "Rigueur & Précision", "Adaptabilité"],
+    "values": ["Excellence", "Partage du savoir", "Intégrité", "Travail bien fait"]
   },
   "education": {
     "title": "ÉDUCATION",
     "items": [
-      {
-        "school": "ESIG Global Success",
-        "degree": "Licence en Génie Mécanique",
-        "year": "2024 - En cours",
-        "description": "Formation approfondie en conception mécanique, automatisme et sciences de l'ingénieur au Togo."
-      },
-      {
-        "school": "OPEM",
-        "degree": "Formation initiale en techniques industrielles",
-        "year": "Depuis la 6ème",
-        "description": "Initiation précoce aux outils de conception assistée par ordinateur et aux techniques de fabrication."
-      }
+      { "school": "ESIG Global Success", "degree": "Licence en Génie Mécanique", "year": "2024 - En cours", "description": "Formation approfondie en conception mécanique, automatisme et sciences de l'ingénieur au Togo." },
+      { "school": "OPEM", "degree": "Formation initiale en techniques industrielles", "year": "Depuis la 6ème", "description": "Initiation précoce aux outils de conception assistée par ordinateur et aux techniques de fabrication." }
     ]
   },
   "skills": {
@@ -78,6 +150,14 @@ const DEFAULT_CONTENT = {
       { "name": "Conception et Fabrication", "category": "Réalisé", "description": "Projet technique alliant conception numérique sur SolidWorks et réalisation physique en atelier.", "image": "mes-projets/20240719_102946.jpg.jpeg" }
     ]
   },
+  "testimonials": {
+    "title": "TÉMOIGNAGES",
+    "items": [
+      { "author": "Dr. Alphonse GOGOLI", "role": "Co-fondateur DEEZPRO", "text": "Pédro est un formateur exceptionnel qui sait transmettre sa passion pour la CAO à ses étudiants avec une clarté remarquable.", "rating": 5, "avatar": "AG" },
+      { "author": "Équipe JETOUR", "role": "Concessionnaire Automobile", "text": "Un technicien sérieux et compétent. L'installation des ponts élévateurs a été réalisée dans les délais avec un professionnalisme exemplaire.", "rating": 5, "avatar": "JT" },
+      { "author": "Prof. Ayarema AFIO", "role": "Université de Lomé", "text": "Un étudiant brillant doté d'une curiosité intellectuelle rare. Son projet de table de dessin témoigne d'une maîtrise technique impressionnante.", "rating": 5, "avatar": "PA" }
+    ]
+  },
   "roadmap": {
     "title": "MA FEUILLE DE ROUTE",
     "items": [
@@ -95,6 +175,14 @@ const DEFAULT_CONTENT = {
       { "name": "Professeur Ayarema AFIO", "role": "Université de Lomé", "description": "Une référence de la recherche scientifique au Togo. Son parcours m'inspire la rigueur intellectuelle." }
     ]
   },
+  "blog": {
+    "title": "BLOG & ARTICLES",
+    "items": [
+      { "title": "Introduction à SolidWorks pour débutants", "date": "Janvier 2026", "tag": "CAO", "summary": "Découvrez les bases de SolidWorks : interface, premières esquisses et modélisation 3D simple. Un guide pratique pour démarrer la conception assistée par ordinateur." },
+      { "title": "Arduino et automatisme : mon expérience", "date": "Novembre 2025", "tag": "Automatisme", "summary": "Retour d'expérience sur mon projet de feux tricolores automatisés : conception du circuit, programmation et intégration mécanique." },
+      { "title": "La maintenance navale : un métier d'avenir", "date": "Septembre 2025", "tag": "Terrain", "summary": "Mon stage chez OTAM m'a ouvert les yeux sur la complexité de la maintenance des systèmes navals et les opportunités qu'offre ce secteur en Afrique." }
+    ]
+  },
   "objective": {
     "title": "MON OBJECTIF",
     "text": "Mon ambition ultime est de devenir un pionnier de l'ingénierie moderne en Afrique. Je souhaite créer des solutions industrielles 'Made in Togo' qui répondent aux besoins locaux, tout en bâtissant une structure capable de former les futurs experts technologiques du continent."
@@ -110,205 +198,198 @@ const DEFAULT_CONTENT = {
   }
 };
 
-// Load content: localStorage (admin edits) first, then embedded defaults
+// Load content: localStorage first, then defaults
 function loadContent() {
-    const stored = localStorage.getItem(STORAGE_KEY);
-    if (stored) {
-        return JSON.parse(stored);
-    }
-    return DEFAULT_CONTENT;
+  const stored = localStorage.getItem(STORAGE_KEY);
+  if (stored) {
+    const parsed = JSON.parse(stored);
+    // Merge new sections if missing (upgrade path)
+    if (!parsed.testimonials) parsed.testimonials = DEFAULT_CONTENT.testimonials;
+    if (!parsed.blog) parsed.blog = DEFAULT_CONTENT.blog;
+    if (parsed.hero && parsed.hero.cv === undefined) parsed.hero.cv = '';
+    return parsed;
+  }
+  return DEFAULT_CONTENT;
 }
 
-// Skill icons mapping
+// ===== Helpers =====
 function getSkillIcon(category) {
-    const icons = {
-        'CAO': 'fa-drafting-compass',
-        'Automatisme': 'fa-microchip',
-        'Terrain': 'fa-wrench',
-        'Leadership': 'fa-users'
-    };
-    return icons[category] || 'fa-cog';
+  const icons = { 'CAO': 'fa-drafting-compass', 'Automatisme': 'fa-microchip', 'Terrain': 'fa-wrench', 'Leadership': 'fa-users' };
+  return icons[category] || 'fa-cog';
 }
 
-// Get initials for inspiration avatars
 function getInitials(name) {
-    return name.split(' ').filter(w => w.length > 2).slice(0, 2).map(w => w[0]).join('');
+  return name.split(' ').filter(function(w) { return w.length > 2; }).slice(0, 2).map(function(w) { return w[0]; }).join('');
 }
 
-// Populate the page with content
+function starsHtml(rating) {
+  var html = '';
+  for (var i = 1; i <= 5; i++) {
+    html += '<i class="fas fa-star' + (i <= rating ? '' : ' empty') + '"></i>';
+  }
+  return html;
+}
+
+// ===== Render =====
 function render(data) {
-    // Hero
-    document.getElementById('hero-subtitle').textContent = data.hero.subtitle;
-    document.getElementById('hero-title').textContent = data.hero.title;
-    document.getElementById('hero-name').textContent = data.hero.name;
-    document.getElementById('hero-tagline').textContent = data.hero.tagline;
-    document.getElementById('hero-image').src = data.hero.image;
+  // Hero
+  document.getElementById('hero-subtitle').textContent = data.hero.subtitle;
+  document.getElementById('hero-name').textContent = data.hero.name;
+  document.getElementById('hero-tagline').textContent = data.hero.tagline;
+  document.getElementById('hero-image').src = data.hero.image;
 
-    // Introduction
-    document.getElementById('intro-title').textContent = data.introduction.title;
-    document.getElementById('intro-text').textContent = data.introduction.text;
-    document.getElementById('intro-image').src = data.introduction.image;
+  // CV button
+  const cvBtn = document.getElementById('hero-cv-btn');
+  if (cvBtn) {
+    if (data.hero.cv) {
+      cvBtn.href = data.hero.cv;
+      cvBtn.style.display = 'inline-flex';
+    } else {
+      cvBtn.style.display = 'none';
+    }
+  }
 
-    // About
-    document.getElementById('about-title').textContent = data.about.title;
-    document.getElementById('about-text').textContent = data.about.text;
-    document.getElementById('about-image').src = data.about.image;
+  // Introduction
+  document.getElementById('intro-title').textContent = data.introduction.title;
+  document.getElementById('intro-text').textContent = data.introduction.text;
+  document.getElementById('intro-image').src = data.introduction.image;
 
-    const qualitiesList = document.getElementById('about-qualities');
-    qualitiesList.innerHTML = data.about.qualities.map(q => `<li>${q}</li>`).join('');
+  // About
+  document.getElementById('about-title').textContent = data.about.title;
+  document.getElementById('about-text').textContent = data.about.text;
+  document.getElementById('about-image').src = data.about.image;
+  document.getElementById('about-qualities').innerHTML = data.about.qualities.map(function(q) { return '<li>' + q + '</li>'; }).join('');
+  document.getElementById('about-values').innerHTML = data.about.values.map(function(v) { return '<li>' + v + '</li>'; }).join('');
 
-    const valuesList = document.getElementById('about-values');
-    valuesList.innerHTML = data.about.values.map(v => `<li>${v}</li>`).join('');
+  // Education
+  document.getElementById('education-title').textContent = data.education.title;
+  document.getElementById('education-items').innerHTML = data.education.items.map(function(item) {
+    return '<div class="timeline-item fade-in"><h3>' + item.school + '</h3><div class="subtitle">' + item.degree + '</div><span class="period">' + item.year + '</span><p>' + item.description + '</p></div>';
+  }).join('');
 
-    // Education
-    document.getElementById('education-title').textContent = data.education.title;
-    document.getElementById('education-items').innerHTML = data.education.items.map(item => `
-        <div class="timeline-item fade-in">
-            <h3>${item.school}</h3>
-            <div class="subtitle">${item.degree}</div>
-            <span class="period">${item.year}</span>
-            <p>${item.description}</p>
-        </div>
-    `).join('');
+  // Skills
+  document.getElementById('skills-title').textContent = data.skills.title;
+  document.getElementById('skills-items').innerHTML = data.skills.items.map(function(skill) {
+    return '<div class="skill-card fade-in"><div class="skill-icon"><i class="fas ' + getSkillIcon(skill.category) + '"></i></div><h3>' + skill.name + '</h3><div class="skill-category">' + skill.category + '</div><p>' + skill.description + '</p></div>';
+  }).join('');
 
-    // Skills
-    document.getElementById('skills-title').textContent = data.skills.title;
-    document.getElementById('skills-items').innerHTML = data.skills.items.map(skill => `
-        <div class="skill-card fade-in">
-            <div class="skill-icon"><i class="fas ${getSkillIcon(skill.category)}"></i></div>
-            <h3>${skill.name}</h3>
-            <div class="skill-category">${skill.category}</div>
-            <p>${skill.description}</p>
-        </div>
-    `).join('');
+  // Experience
+  document.getElementById('experience-title').textContent = data.experience.title;
+  document.getElementById('experience-items').innerHTML = data.experience.items.map(function(item) {
+    return '<div class="timeline-item fade-in"><h3>' + item.role + '</h3><div class="subtitle">' + item.company + '</div><span class="period">' + item.period + '</span><p>' + item.description + '</p></div>';
+  }).join('');
 
-    // Experience
-    document.getElementById('experience-title').textContent = data.experience.title;
-    document.getElementById('experience-items').innerHTML = data.experience.items.map(item => `
-        <div class="timeline-item fade-in">
-            <h3>${item.role}</h3>
-            <div class="subtitle">${item.company}</div>
-            <span class="period">${item.period}</span>
-            <p>${item.description}</p>
-        </div>
-    `).join('');
+  // Projects
+  document.getElementById('projects-title').textContent = data.projects.title;
+  document.getElementById('projects-items').innerHTML = data.projects.items.map(function(project) {
+    return '<div class="project-card fade-in"><div class="project-card-image"><img src="' + project.image + '" alt="' + project.name + '"></div><div class="project-card-body"><span class="badge">' + project.category + '</span><h3>' + project.name + '</h3><p>' + project.description + '</p></div></div>';
+  }).join('');
 
-    // Projects
-    document.getElementById('projects-title').textContent = data.projects.title;
-    document.getElementById('projects-items').innerHTML = data.projects.items.map(project => `
-        <div class="project-card fade-in">
-            <div class="project-card-image">
-                <img src="${project.image}" alt="${project.name}">
-            </div>
-            <div class="project-card-body">
-                <span class="badge">${project.category}</span>
-                <h3>${project.name}</h3>
-                <p>${project.description}</p>
-            </div>
-        </div>
-    `).join('');
+  // Testimonials
+  if (data.testimonials) {
+    document.getElementById('testimonials-title').textContent = data.testimonials.title;
+    document.getElementById('testimonials-items').innerHTML = data.testimonials.items.map(function(t) {
+      return '<div class="testimonial-card fade-in"><div class="testimonial-stars">' + starsHtml(t.rating) + '</div><p class="testimonial-text">&ldquo;' + t.text + '&rdquo;</p><div class="testimonial-author"><div class="testimonial-avatar">' + (t.avatar || getInitials(t.author)) + '</div><div><div class="testimonial-name">' + t.author + '</div><div class="testimonial-role">' + t.role + '</div></div></div></div>';
+    }).join('');
+  }
 
-    // Roadmap
-    document.getElementById('roadmap-title').textContent = data.roadmap.title;
-    document.getElementById('roadmap-items').innerHTML = data.roadmap.items.map(item => `
-        <div class="roadmap-card fade-in">
-            <div class="roadmap-icon">${item.icon}</div>
-            <div class="roadmap-date">${item.date}</div>
-            <h3>${item.title}</h3>
-            <p>${item.description}</p>
-        </div>
-    `).join('');
+  // Roadmap
+  document.getElementById('roadmap-title').textContent = data.roadmap.title;
+  document.getElementById('roadmap-items').innerHTML = data.roadmap.items.map(function(item) {
+    return '<div class="roadmap-card fade-in"><div class="roadmap-icon">' + item.icon + '</div><div class="roadmap-date">' + item.date + '</div><h3>' + item.title + '</h3><p>' + item.description + '</p></div>';
+  }).join('');
 
-    // Inspirations
-    document.getElementById('inspirations-title').textContent = data.inspirations.title;
-    document.getElementById('inspirations-items').innerHTML = data.inspirations.items.map(item => `
-        <div class="inspiration-card fade-in">
-            <div class="inspiration-avatar">${getInitials(item.name)}</div>
-            <h3>${item.name}</h3>
-            <div class="inspiration-role">${item.role}</div>
-            <p>${item.description}</p>
-        </div>
-    `).join('');
+  // Inspirations
+  document.getElementById('inspirations-title').textContent = data.inspirations.title;
+  document.getElementById('inspirations-items').innerHTML = data.inspirations.items.map(function(item) {
+    return '<div class="inspiration-card fade-in"><div class="inspiration-avatar">' + getInitials(item.name) + '</div><h3>' + item.name + '</h3><div class="inspiration-role">' + item.role + '</div><p>' + item.description + '</p></div>';
+  }).join('');
 
-    // Objective
-    document.getElementById('objective-title').textContent = data.objective.title;
-    document.getElementById('objective-text').textContent = data.objective.text;
+  // Blog
+  if (data.blog) {
+    document.getElementById('blog-title').textContent = data.blog.title;
+    document.getElementById('blog-items').innerHTML = data.blog.items.map(function(post) {
+      return '<div class="blog-card fade-in"><div class="blog-card-header"><span class="blog-tag">' + post.tag + '</span><span class="blog-date">' + post.date + '</span></div><h3>' + post.title + '</h3><p>' + post.summary + '</p></div>';
+    }).join('');
+  }
 
-    // Contact
-    document.getElementById('contact-title').textContent = data.contact.title;
-    document.getElementById('contact-subtitle').textContent = data.contact.subtitle;
-    document.getElementById('contact-email').textContent = data.contact.email;
-    document.getElementById('contact-phone').textContent = data.contact.phone;
-    document.getElementById('contact-location').textContent = data.contact.location;
-    document.getElementById('contact-instagram').href = data.contact.instagram;
-    document.getElementById('contact-linkedin').href = data.contact.linkedin;
-    document.getElementById('contact-email-link').href = 'mailto:' + data.contact.email;
+  // Objective
+  document.getElementById('objective-title').textContent = data.objective.title;
+  document.getElementById('objective-text').textContent = data.objective.text;
 
-    // Init animations after rendering
-    initAnimations();
+  // Contact
+  document.getElementById('contact-title').textContent = data.contact.title;
+  document.getElementById('contact-subtitle').textContent = data.contact.subtitle;
+  document.getElementById('contact-email').textContent = data.contact.email;
+  document.getElementById('contact-phone').textContent = data.contact.phone;
+  document.getElementById('contact-location').textContent = data.contact.location;
+  document.getElementById('contact-instagram').href = data.contact.instagram;
+  document.getElementById('contact-linkedin').href = data.contact.linkedin;
+  document.getElementById('contact-email-link').href = 'mailto:' + data.contact.email;
+
+  // Typewriter on hero title after short delay
+  setTimeout(function() { typewriter('hero-title', data.hero.title, 100); }, 400);
+
+  // Scroll animations
+  initAnimations();
 }
 
-// ===== Navbar scroll effect =====
+// ===== Navbar =====
 function initNavbar() {
-    const navbar = document.getElementById('navbar');
-    const toggle = document.getElementById('nav-toggle');
-    const links = document.getElementById('nav-links');
+  const navbar = document.getElementById('navbar');
+  const toggle = document.getElementById('nav-toggle');
+  const links = document.getElementById('nav-links');
 
-    window.addEventListener('scroll', () => {
-        navbar.classList.toggle('scrolled', window.scrollY > 50);
-    });
+  window.addEventListener('scroll', function() {
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
+  });
 
-    toggle.addEventListener('click', () => {
-        links.classList.toggle('open');
-    });
+  toggle.addEventListener('click', function() {
+    links.classList.toggle('open');
+  });
 
-    // Close mobile menu on link click
-    links.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => links.classList.remove('open'));
-    });
+  links.querySelectorAll('a').forEach(function(link) {
+    link.addEventListener('click', function() { links.classList.remove('open'); });
+  });
 
-    // Active link highlighting
-    const sections = document.querySelectorAll('section[id]');
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY + 100;
-        sections.forEach(section => {
-            const top = section.offsetTop;
-            const height = section.offsetHeight;
-            const id = section.getAttribute('id');
-            const navLink = links.querySelector(`a[href="#${id}"]`);
-            if (navLink) {
-                navLink.classList.toggle('active', scrollY >= top && scrollY < top + height);
-            }
-        });
+  const sections = document.querySelectorAll('section[id]');
+  window.addEventListener('scroll', function() {
+    const scrollY = window.scrollY + 100;
+    sections.forEach(function(section) {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      const id = section.getAttribute('id');
+      const navLink = links.querySelector('a[href="#' + id + '"]');
+      if (navLink) navLink.classList.toggle('active', scrollY >= top && scrollY < top + height);
     });
+  });
 }
 
-// ===== Scroll animations =====
+// ===== Scroll Animations =====
 function initAnimations() {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(function(el) { observer.observe(el); });
 }
 
-// ===== Contact form =====
+// ===== Contact Form =====
 function initContactForm() {
-    document.getElementById('contact-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Merci pour votre message ! Je vous répondrai dans les plus brefs délais.');
-        e.target.reset();
-    });
+  document.getElementById('contact-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert('Merci pour votre message ! Je vous répondrai dans les plus brefs délais.');
+    e.target.reset();
+  });
 }
 
 // ===== Init =====
-document.addEventListener('DOMContentLoaded', () => {
-    const data = loadContent();
-    render(data);
-    initNavbar();
-    initContactForm();
+document.addEventListener('DOMContentLoaded', function() {
+  const data = loadContent();
+  render(data);
+  initNavbar();
+  initContactForm();
+  initTheme();
+  initLang();
 });
