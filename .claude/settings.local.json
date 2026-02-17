@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(node -e:*)",
-      "Bash(powershell.exe -Command \"Get-Content 'c:/Users/Clement AGBALENYO/Documents/GitHub/Portofolio-ATTOH-MENSAH/js/main.js' | Measure-Object -Line\":*)"
+      "Bash(powershell.exe -Command \"Get-Content 'c:/Users/Clement AGBALENYO/Documents/GitHub/Portofolio-ATTOH-MENSAH/js/main.js' | Measure-Object -Line\":*)",
+      "Bash(git push:*)"
     ]
   }
 }
