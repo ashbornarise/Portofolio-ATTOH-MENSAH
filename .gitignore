@@ -1,0 +1,13 @@
+# Tokens et secrets
+ghp_*
+*.token
+.env
+
+# OS
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# IDE
+.vscode/
+.idea/
